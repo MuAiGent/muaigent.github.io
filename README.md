@@ -1,25 +1,52 @@
-# MuAiGent 个人站点
+# MuAiGent 个人博客
 
-这是我的GitHub Pages个人站点仓库。
+这是我基于Jekyll的个人博客网站，托管在GitHub Pages上。
 
-## 站点内容
+## 网站特点
 
-- 个人介绍
-- 项目展示
-- 联系方式
+- 响应式设计，适配各种屏幕尺寸
+- 简洁美观的Strata风格主题
+- 支持博客文章、分类和标签
+- 优化的阅读体验
 
 ## 本地开发
 
-如需在本地运行此站点：
+如果您想在本地运行此网站，请按照以下步骤操作：
 
-1. 克隆仓库: `git clone https://github.com/MuAiGent/MuAiGent.github.io.git`
-2. 进入目录: `cd MuAiGent.github.io`
-3. 使用浏览器打开 `index.html` 文件
+1. 安装Ruby和Bundler
+2. 克隆这个仓库：`git clone https://github.com/MuAiGent/muaigent.github.io.git`
+3. 进入项目目录：`cd muaigent.github.io`
+4. 安装依赖：`bundle install`
+5. 启动本地服务器：`bundle exec jekyll serve`
+6. 在浏览器中访问：`http://localhost:4000`
 
-## 部署
+## 网站结构
 
-此网站通过GitHub Pages自动部署。任何推送到主分支的更改将自动发布。
+- `_posts/` - 博客文章目录
+- `_layouts/` - 页面布局模板
+- `_includes/` - 可重用的HTML组件
+- `assets/` - CSS、JavaScript和图片资源
+- `_config.yml` - Jekyll配置文件
 
-## 联系方式
+## 添加新文章
 
-GitHub: [@MuAiGent](https://github.com/MuAiGent)
+要添加新的博客文章，请在`_posts`目录下创建一个新的Markdown文件，文件名格式为：`YYYY-MM-DD-title.md`。
+
+文件开头需要包含YAML前置数据：
+
+```yaml
+---
+layout: post
+title: "文章标题"
+date: YYYY-MM-DD HH:MM:SS +0800
+categories: [分类1, 分类2]
+tags: [标签1, 标签2]
+image: /assets/images/image-name.jpg
+---
+```
+
+然后在下面编写正文内容，使用Markdown格式。
+
+## 许可证
+
+本项目采用MIT许可证。

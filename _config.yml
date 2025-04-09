@@ -1,5 +1,36 @@
 theme: jekyll-theme-minimal
 title: MuAiGent
-description: 个人主页
+description: 个人博客与思考
 url: "https://muaigent.github.io"
-github_username: MuAiGent 
+baseurl: ""
+github_username: MuAiGent
+
+# 主题配置
+author:
+  name: MuAiGent
+  avatar: /assets/images/avatar.jpg
+  bio: 探索AI与编程的可能性
+  location: 中国
+  social:
+    github: MuAiGent
+
+# 构建设置
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+# 分页设置
+paginate: 5
+paginate_path: "/blog/page:num/"
+
+# 排除文件
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/ 
