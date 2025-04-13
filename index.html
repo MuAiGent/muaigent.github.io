@@ -1,28 +1,1198 @@
----
-layout: home
----
-<section class="about-me">
-    <h2>关于我</h2>
-    <p>这里是我的个人介绍。我对AI和编程充满热情，正在探索人工智能的各种可能性。</p>
-</section>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈木 - AI 产品经理简历 (聚焦游戏AI智能NPC)</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* === 全局与基础样式 === */
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #10182b; /* 改为深色背景，与portfolio-section一致 */
+            overflow-x: hidden; /* 防止水平滚动条 */
+            width: 100%; /* 确保body宽度为100% */
+            min-height: 100vh; /* 设置最小高度为视口高度 */
+            display: flex;
+            flex-direction: column;
+        }
 
-<section class="projects">
-    <h2>项目</h2>
-    <div class="project-grid">
-        <div class="project-card">
-            <h3>项目名称</h3>
-            <p>项目简介，这里可以描述项目的基本信息和功能特点。</p>
-            <a href="#" class="project-link">查看详情</a>
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            font-weight: 600; /* 标题加粗 */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        strong { /* 统一强调色 */
+             color: #2980b9; /* 比链接稍深的蓝色 */
+        }
+
+
+        /* === 顶部头图区域 === */
+        .header-banner {
+            position: relative;
+            height: 350px; /* 调整头图高度 */
+            width: 100%;
+            overflow: hidden;
+            background-color: #10182b; /* 背景色，图片加载失败时显示 */
+        }
+        .header-banner-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保持比例填充 */
+            opacity: 0.8; /* 图片透明度，让文字更清晰 */
+        }
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)); /* 渐变遮罩 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .header-content h1 {
+            font-size: 3rem; /* 主标题加大 */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .header-content p {
+            font-size: 1.3rem; /* 副标题加大 */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* === 主布局容器 === */
+        .main-layout {
+            margin: -50px 0 0 0;
+            padding: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 10;
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        /* === 侧边栏 === */
+        .sidebar {
+            width: 340px;
+            flex: 0 0 340px;
+            background-color: #10182b;
+            color: #e0e0e0;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* 调整移动端响应式布局 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                flex: none;
+                padding: 20px;
+            }
+        }
+
+        /* 个人资料 */
+        .profile-block { text-align: center; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid #3a3f51; }
+        .avatar img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid #fff; object-fit: cover; margin-bottom: 15px; }
+        .profile-block h1 { color: #fff; font-size: 1.7rem; margin: 10px 0 5px; }
+        .profile-block .job-title { color: #a0a0a0; font-size: 1rem; margin-bottom: 10px; line-height: 1.4; }
+        .profile-highlight { font-size: 0.9rem; color: #c0c0c0; font-style: italic; margin-top: 5px; }
+        /* 联系方式 */
+        .contact-info { margin-bottom: 25px; }
+        .contact-info h3, .skills-overview h3, .page-nav h3 { color: #fff; font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid #3a3f51; padding-bottom: 8px; font-weight: 600;}
+        .contact-info ul li { display: flex; align-items: center; margin-bottom: 12px; font-size: 0.9rem; }
+        .contact-info i { margin-right: 12px; width: 18px; text-align: center; color: #6fa8dc; font-size: 1.1em; }
+        .contact-info a { color: #e0e0e0; word-break: break-all; }
+        .contact-info a:hover { color: #fff; }
+        .contact-info .blog-stats { /* 博文数据样式 */
+            font-weight: bold;
+            color: #fff;
+            margin-left: 5px;
+            background-color: #3a3f51;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+         .contact-info .sub-link { /* 子链接缩进 */
+             padding-left: 30px;
+             font-size: 0.85rem;
+             margin-top: -5px;
+             margin-bottom: 10px;
+         }
+         .contact-info .sub-link a {
+             color: #a0a0a0;
+         }
+         .contact-info .sub-link a:hover {
+             color: #fff;
+         }
+
+        /* 技能概览 */
+        .skills-overview { margin-bottom: 25px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag { background-color: #3a3f51; color: #e0e0e0; padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; white-space: nowrap; }
+        /* 快速导航 - 重新设计 */
+        .page-nav {
+            position: fixed;
+            z-index: 1000;
+            background-color: rgba(16, 24, 43, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-nav-scroll {
+            position: relative;
+            max-width: 80%;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.1);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            gap: 15px;
+            padding: 5px 0;
+            margin: 0 auto;
+            min-width: max-content;
+            list-style: none;
+        }
+
+        .page-nav li {
+            flex: 0 0 auto;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-nav a {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: rgba(26, 38, 66, 0.5);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .page-nav a:hover {
+            color: #fff;
+            background-color: rgba(58, 63, 81, 0.7);
+            text-decoration: none;
+        }
+
+        /* 移除渐变遮罩 */
+        .page-nav::before,
+        .page-nav::after {
+            display: none;
+        }
+
+        /* 优化滚动条样式 */
+        .page-nav-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .page-nav-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .page-nav-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .page-nav-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 添加滚动到最左/最右的指示器 */
+        .page-nav-scroll.at-start {
+            padding-left: 0;
+        }
+
+        .page-nav-scroll.at-end {
+            padding-right: 0;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .page-nav-scroll {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+            
+            .page-nav ul {
+                gap: 10px;
+            }
+            
+            .page-nav a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 移除之前的媒体查询样式 */
+        @media (max-width: 768px) {
+            .main-layout {
+                margin-bottom: 70px; /* 为底部导航留出空间 */
+            }
+            
+            .portfolio-section {
+                margin-bottom: 70px; /* 为底部导航留出空间 */
+            }
+        }
+
+        /* 调整主布局，为固定导航腾出空间 */
+        @media (max-width: 768px) {
+            .main-layout {
+                margin-top: 60px; /* 为顶部固定导航留出空间 */
+            }
+        }
+
+        /* 移除原有的导航样式 */
+        .sidebar .page-nav {
+            margin-bottom: 0;
+        }
+
+        /* === 主内容区 === */
+        .main-content {
+            flex: 1;
+            padding: 40px 50px;
+            box-sizing: border-box;
+        }
+        .main-content section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .main-content section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .main-content h2 { font-size: 1.8rem; color: #10182b; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 3px solid #6fa8dc; display: inline-block; }
+        .main-content h3 { font-size: 1.4rem; color: #2c3e50; margin-top: 30px; margin-bottom: 18px; }
+        .main-content p, .main-content li { color: #555; line-height: 1.8; } /* 增加正文行高 */
+        .main-content ul { margin-left: 20px; padding-left: 0; list-style: disc; }
+        .main-content li { margin-bottom: 8px; }
+
+        /* 工作经历等条目样式 */
+        .experience-item, .project-item { margin-bottom: 30px; }
+        .experience-item:last-child, .project-item:last-child { margin-bottom: 0; }
+        .item-title { font-size: 1.2rem; font-weight: bold; color: #333; margin-bottom: 4px; }
+        .item-subtitle { color: #3498db; font-weight: bold; margin-bottom: 4px; font-size: 1.05rem; }
+        .item-date { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 12px; }
+        .item-description ul { margin-top: 10px; }
+
+        /* AI实践部分的强调 */
+        .ai-practice-highlight strong { color: #0d2374; }
+        .ai-practice-highlight .成果 { background-color: #fdf2e9; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin: 0 3px; display: inline-block; }
+
+        /* 技术栈部分样式 */
+        .tech-stack-list {
+            columns: 2; /* 尝试分两栏 */
+            column-gap: 40px;
+            margin-top: 15px;
+        }
+         .tech-stack-list li {
+             margin-bottom: 10px;
+             font-size: 0.95rem;
+         }
+         .tech-stack-list strong { /* 技术名称 */
+             color: #333;
+             margin-right: 5px;
+         }
+         .tech-stack-list span { /* 熟练度描述 */
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+         }
+
+        /* === 底部作品展示区 === */
+        .portfolio-section {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #10182b;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-title-bar {
+            margin: 0;
+            padding: 15px 0;
+            background-color: #10182b;
+            text-align: center; /* 添加居中对齐 */
+        }
+
+        .portfolio-title-bar h2 {
+            color: #fff;
+            margin: 0;
+            font-size: 1.8rem;
+            border: none;
+            padding: 0;
+            display: inline-block;
+            text-align: center; /* 确保文字居中 */
+            width: 100%; /* 让标题占满宽度 */
+        }
+
+        /* 作品网格容器 */
+        .portfolio-grid {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* 移除间隙 */
+        }
+
+        /* 作品项样式 */
+        .portfolio-item {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: relative;
+            background-color: #10182b;
+            border: none; /* 移除边框 */
+        }
+
+        /* 缩略图容器 */
+        .portfolio-thumbnail {
+            width: 100%;
+            position: relative;
+            margin: 0; /* 移除margin */
+            padding: 0;
+            display: block;
+            background-color: #10182b;
+        }
+
+        /* 缩略图图片 */
+        .portfolio-thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0; /* 使用margin替代vertical-align来控制间距 */
+        }
+
+        /* 展开区域样式 */
+        .portfolio-expand-section {
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #10182b;
+            margin: 0;
+            padding: 0;
+            border: none;
+            position: relative;
+        }
+
+        .portfolio-expand-section.active {
+            max-height: 3000px;
+            margin-bottom: 0; /* 移除底部间距 */
+        }
+
+        /* 展开网格 */
+        .expand-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 展开项 */
+        .expand-item {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            opacity: 1;
+        }
+
+        /* 展开项图片 */
+        .expand-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0; /* 使用margin替代vertical-align来控制间距 */
+        }
+
+        /* 展开按钮位置调整 */
+        .expand-toggle-btn {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        /* 底部临时收起按钮样式 */
+        .bottom-collapse-btn {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 15px 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .bottom-collapse-btn.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 遮罩层样式 */
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.4));
+            color: #fff;
+            padding: 40px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .portfolio-overlay.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 调整详情按钮位置，避免重叠 */
+        .details-toggle-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            transform: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-overlay {
+                padding: 20px;
+            }
+            .portfolio-overlay h4 {
+                font-size: 1.2rem;
+            }
+            .portfolio-brief {
+                font-size: 0.9rem;
+            }
+            .main-layout {
+                margin: 0;
+            }
+            .details-toggle-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* === 响应式布局 === */
+        @media (max-width: 992px) {
+            .sidebar { 
+                width: 280px; 
+                flex: 0 0 280px; 
+            }
+            .main-content { 
+                padding: 30px 40px; 
+            }
+            .tech-stack-list { 
+                columns: 1; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-banner {
+                height: 280px;
+            }
+            
+            .main-layout {
+                flex-direction: column;
+                margin: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .sidebar {
+                width: 100%;
+                flex: none;
+                padding: 20px;
+            }
+            
+            .main-content {
+                width: 100%;
+                padding: 20px;
+                margin: 0;
+            }
+            
+            .main-content section {
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+            }
+            
+            .main-content section:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            
+            /* 移除所有可能导致间距的边距 */
+            .profile-block {
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .contact-info,
+            .skills-overview,
+            .page-nav {
+                margin-bottom: 15px;
+            }
+            
+            .page-nav:last-child {
+                margin-bottom: 0;
+            }
+            
+            /* 确保作品展示区无缝衔接 */
+            .portfolio-section {
+                margin-top: 0;
+                padding: 0;
+            }
+            
+            .portfolio-title-bar {
+                margin: 0;
+            }
+            
+            .portfolio-grid {
+                margin: 0;
+            }
+            
+            /* 移除最后一个section的边框和间距 */
+            .main-content section:last-of-type {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        /* 针对更小屏幕的优化 */
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            .header-content p {
+                font-size: 1rem;
+            }
+            .portfolio-thumbnail img {
+                min-height: 200px;
+            }
+            .portfolio-tag {
+                margin-bottom: 8px;
+            }
+            .main-layout {
+                margin: 0;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .sidebar {
+                padding: 15px;
+            }
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 4px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-tag:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .portfolio-tags {
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        footer {
+            margin: 0;
+            padding: 15px 0;
+            background-color: #10182b;
+            color: #888;
+            text-align: center;
+            font-size: 0.9em;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* 添加一个微妙的分隔线 */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ==== 顶部头图 ==== -->
+    <header class="header-banner">
+        <!-- !!! 请将这里的 src 替换为你的头图图片路径 !!! -->
+        <img src="assets/images/header-banner.jpg" alt="头图背景" class="header-banner-img">
+        <div class="header-overlay">
+            <div class="header-content">
+                <h1>哈木</h1>
+                <p>AI 产品经理 | 聚焦 AI 智能 NPC</p>
+            </div>
         </div>
-        <!-- 更多项目卡片可以在这里添加 -->
-    </div>
-</section>
+    </header>
 
-<section class="contact">
-    <h2>联系方式</h2>
-    <p>您可以通过以下方式联系我：</p>
-    <ul>
-        <li>GitHub: <a href="https://github.com/MuAiGent" target="_blank">@MuAiGent</a></li>
-        <!-- 其他联系方式可以在这里添加 -->
-    </ul>
-</section>
+    <!-- ==== 主体布局 ==== -->
+    <div class="main-layout">
+
+        <!-- ==== 侧边栏 ==== -->
+        <aside class="sidebar">
+            <!-- 个人资料 -->
+            <div class="profile-block">
+                <div class="avatar">
+                    <!-- !!! 请将这里的 src 替换为你的头像图片路径 !!! -->
+                    <img src="assets/images/avatar.jpg" alt="哈木头像">
+                </div>
+                <h1>哈木</h1>
+                <p class="job-title">AI 产品经理<br>聚焦游戏/XR/元宇宙/AI智能NPC</p>
+                <p class="profile-highlight">14年复合经验，聚焦AI NPC，成果见博客。</p>
+            </div>
+
+            <!-- 联系方式 -->
+            <div class="contact-info">
+                <h3>联系方式</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:muaigent@foxmail.com">muaigent@foxmail.com</a></li>
+                    <li><i class="fas fa-globe"></i><a href="https://muaigent.github.io/" target="_blank">个人站点/在线简历</a></li>
+                    <li>
+                        <i class="fas fa-book-reader"></i> AI NPC 博文
+                        <span class="blog-stats">12k+阅读 / 200+粉</span>
+                    </li>
+                    <li class="sub-link"><i class="fab fa-csdn"></i><a href="https://blog.csdn.net/u013524397?type=blog" target="_blank">CSDN主页 (文章均分92)</a></li>
+                    <li class="sub-link"><i class="fas fa-user-edit"></i><a href="https://www.woshipm.com/u/1297917" target="_blank">人人都是PM主页</a></li>
+                 </ul>
+            </div>
+
+            <!-- 技能概览 -->
+            <div class="skills-overview">
+                <h3>技能概览</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AI NPC</span>
+                    <span class="skill-tag">游戏AI</span>
+                    <span class="skill-tag">XR [VR/AR]</span>
+                    <span class="skill-tag">LLM应用</span>
+                    <span class="skill-tag">ML/RL学习</span>
+                    <span class="skill-tag">产品管理</span>
+                    <span class="skill-tag">产品设计</span>
+                    <span class="skill-tag">解决方案</span>
+                    <span class="skill-tag">需求分析</span>
+                    <span class="skill-tag">项目落地</span>
+                    <span class="skill-tag">快速学习</span>
+                    <span class="skill-tag">3D美术</span>
+                </div>
+            </div>
+
+            <!-- 快速导航 -->
+            <nav class="page-nav">
+                <div class="page-nav-scroll">
+                    <ul>
+                        <li><a href="#summary">个人总结</a></li>
+                        <li><a href="#ai-practice">AI实践与输出</a></li>
+                        <li><a href="#skills-detailed">专业技能</a></li>
+                        <li><a href="#experience">工作经历</a></li>
+                        <li><a href="#entrepreneurship">创业经历</a></li>
+                        <li><a href="#education">教育背景</a></li>
+                        <li><a href="#honors">荣誉与专利</a></li>
+                        <li><a href="#portfolio">作品案例</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- ==== 主内容区 ==== -->
+        <main class="main-content">
+
+            <!-- 个人总结 -->
+            <section id="summary">
+                <h2>个人总结</h2>
+                 <p>拥有14年经验的<strong>复合型产品人</strong>，以深厚的<strong>3D美术背景</strong>为起点，贯穿游戏全流程美术制作、大型ToC游戏项目管理(<strong>网易《率土之滨》等</strong>)、<strong>并作为产品经理主导了多个XR（VR/AR）及ToB解决方案项目</strong>，直至担任SaaS产品负责人的完整职业路径。高度认同AI对互动娱乐的颠覆性潜力，<strong>现全身心投入"AI驱动的智能NPC"在游戏/元宇宙中应用的研究与实践(2024.12至今)</strong>。</p>
+                <p>通过深度学习、动手实践(LLM部署、Unity ML-Agents强化学习NPC Demo、AI应用原型开发)，并<strong>在CSDN/人人都是产品经理等平台发表8篇+高质量AI NPC系列文章，获得积极行业反响 (<span class="成果">全平台累计阅读12k+，粉丝超200</span>)</strong>，快速构建了对该领域的技术认知和产品思考深度。</p>
+                <p>核心优势在于能深刻理解<strong>前沿技术(VR/AR→AI)</strong>，结合<strong>创意与商业洞察</strong>，设计出<strong>创新且高度可行的解决方案</strong>，并具备<strong>较强的端到端项目驱动力</strong>，确保概念转化为实际产品与价值。<strong>寻求能将积累与AI实践相结合的AI产品经理岗位(<span style="color: #3498db; font-weight:bold;">乐意从专员/中级开始</span>)</strong>，专注于智能NPC应用的设计与创新，贡献独特价值并与前沿团队共同成长。</p>
+            </section>
+
+            <!-- AI学习、项目实践与内容输出 -->
+            <section id="ai-practice" class="ai-practice-highlight">
+                <h2>AI学习、项目实践与内容输出 <span style="font-size: 0.8em; color: #7f8c8d;">(2024.12 - 至今)</span></h2>
+                <h3>核心聚焦</h3>
+                 <p>AI驱动的智能NPC在 [游戏] [XR(VR/AR)] [元宇宙] 中的应用。</p>
+                 <h3>学习投入</h3>
+                 <p>持续深度研究相关论文/报告/技术文章，系统性构建AI NPC知识体系（计划输出24篇系列博文，<strong>已发表2篇</strong>）。</p>
+                <h3>技术实践</h3>
+                <ul>
+                    <li><strong>强化学习Demo (Unity ML-Agents):</strong> 完成①2D NPC自动寻路、②贪吃蛇AI训练，<strong>深入探索奖励函数设计对AI行为塑造的影响</strong>。</li>
+                    <li><strong>LLM应用:</strong> 本地部署并测试Llama 3.2/Qwen 2.5；调用API开发①Web端AI对话应用(JS+Python)、②AI辅助日程工具、③AI卡片编辑器等<strong>原型以验证想法</strong>。</li>
+                    <li><strong>AIGC探索 (辅助理解):</strong> 本地部署SD3/Flux1进行AI绘图实验，辅助理解视觉生成技术。</li>
+                    <li><strong>Agent探索:</strong> 使用Dify/Coze进行Agent测试，构建<strong>可调用的专业知识库</strong>。</li>
+                </ul>
+                <h3>知识输出与影响力</h3>
+                <ul>
+                    <li>在CSDN、人人都是产品经理等平台，围绕AI NPC、强化学习、LLM应用等主题，已发表 <strong>8篇+</strong> 深度分析文章（截至2025年4月）。</li>
+                    <li><strong>成果:</strong> <span class="成果">全平台累计获得 <strong>12k+阅读</strong></span>，<span class="成果">总计 <strong>超200位粉丝</strong> 关注</span>，<span class="成果"><strong>CSDN文章质量平均分92</strong></span>，内容获得行业认可。</li>
+                    <li><strong>代表性系列:</strong> 《AI产品经理智能NPC笔记》 (持续更新中)</li>
+                </ul>
+            </section>
+
+             <!-- 专业技能 -->
+            <section id="skills-detailed">
+                <h2>专业技能</h2>
+                 <h3>AI能力 (聚焦NPC实践)</h3>
+                 <ul>
+                    <li>智能NPC研究: 深入理解AI驱动NPC的技术路径(行为树/状态机/LLM/RL结合)，关注并分析行业前沿应用案例。</li>
+                    <li>强化学习(RL)应用: 理解RL基本原理与奖励机制设计 (通过Unity ML-Agents NPC Demo实践验证)。</li>
+                    <li>大语言模型(LLM): 熟悉主流模型应用，有API调用、Prompt Engineering、本地部署实践经验 (探索NPC对话生成)。</li>
+                    <li>Agent探索: 了解Agent框架，使用Dify/Coze进行智能体实验，构建特定领域知识库(RAG应用)。</li>
+                    <li>AI产品规划: 能够分析AI技术在游戏设计、交互体验、内容生成环节的应用潜力与落地挑战。</li>
+                 </ul>
+                 <h3>产品管理与设计 (侧重ToB解决方案，可迁移至ToC)</h3>
+                 <ul>
+                    <li>端到端产品/解决方案能力: 从需求挖掘、市场分析、方案设计、技术选型到产品落地与迭代。</li>
+                    <li>创新方案设计: 擅长基于对新技术的理解，设计创新且可行的产品或解决方案。</li>
+                    <li>技术可行性评估: 具备评估新兴技术并将其融入产品设计的能力。</li>
+                    <li>PRD撰写、原型设计(Axure/Figma)、MVP/POC设计与验证。</li>
+                    <li>数据分析与可视化 (熟练使用Excel)。</li>
+                    <li>用户体验(UX)理解与交互设计思维 (美术背景)。</li>
+                 </ul>
+                 <h3>项目领导与商业能力</h3>
+                 <ul>
+                    <li>跨职能团队协作: 深度协同策划/美术/程序/UX/运营团队(网易经验)。</li>
+                    <li>大型复杂项目主导: 负责从商务接洽、方案设计、投标到交付的全流程管理(千万级VR/AR项目经验)。</li>
+                    <li>客户沟通与提案能力: 具备面向客户进行需求沟通、方案阐述和商务谈判的经验。</li>
+                    <li>风险管理、进度把控、质量保障。</li>
+                 </ul>
+                 <h3>领域专长</h3>
+                 <ul>
+                    <li>游戏: 深入理解游戏研发全流程，熟悉MMORPG/SLG/ARPG类型。</li>
+                    <li>XR [VR/AR]: 6年+解决方案设计与内容开发经验，熟悉沉浸式体验设计。</li>
+                    <li>3D美术: 专业级建模/动画/渲染/引擎集成能力(5年+)。</li>
+                    <li>ToB解决方案、SaaS产品基础认知。</li>
+                 </ul>
+                <h3>技术栈熟悉度</h3>
+                 <ul class="tech-stack-list">
+                     <li><strong>Python/JavaScript:</strong> <span>基础脚本/API调用/简单应用开发</span></li>
+                     <li><strong>Unity:</strong> <span>ML-Agents实践</span></li>
+                     <li><strong>SQL:</strong> <span>基础查询</span></li>
+                     <li><strong>主流LLM API:</strong> <span>应用与集成</span></li>
+                     <li><strong>主流3D软件:</strong> <span>精通 (Maya/Blender/ZBrush等)</span></li>
+                     <li><strong>Figma/Axure/XMind:</strong> <span>熟练 (产品设计与原型)</span></li>
+                     <li><strong>Photoshop:</strong> <span>精通 (视觉设计与处理)</span></li>
+                     <li><strong>AI绘图工具:</strong> <span>实践 (SD/Midjourney等)</span></li>
+                     <li><strong>项目管理工具:</strong> <span>熟练 (Jira/Excel等)</span></li>
+                     <li><strong>XR [VR/AR] 引擎基础:</strong> <span>了解 (U3D/UE)</span></li>
+                 </ul>
+                 <h3>软技能</h3>
+                 <ul>
+                    <li><strong>快速学习与实践能力(AI领域自证)</strong></li>
+                    <li>逻辑思维清晰</li>
+                    <li>专业内容写作与表达能力</li>
+                    <li>解决复杂问题</li>
+                    <li>创新思维</li>
+                    <li>抗压能力(创业经验)</li>
+                 </ul>
+            </section>
+
+            <!-- 工作经历 -->
+            <section id="experience">
+                <h2>工作经历</h2>
+                <div class="experience-item">
+                    <div class="item-title">产品总监</div>
+                    <div class="item-subtitle">广州速启科技有限责任公司</div>
+                    <div class="item-date">2021.07 - 2022.06</div>
+                    <div class="item-description">
+                        <ul>
+                            <li>负责基于华为云的SaaS服务《自由视角》(软硬件结合)产品线，主导软件部分的产品战略、市场分析与路线图规划。</li>
+                            <li>成功设计并推动ToB商业化MVP落地，完成核心功能研发、客户验证与初步市场推广。</li>
+                            <li>规划ToC产品孵化方向，完成用户研究与POC阶段设计。</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="item-title">高级项目管理</div>
+                    <div class="item-subtitle">广州网易互娱 (游戏)</div>
+                    <div class="item-date">2019.12 - 2021.07</div>
+                     <div class="item-description">
+                        <ul>
+                            <li>作为核心项目管理，保障大型ToC游戏（SLG《率土之滨》、《无尽的拉格朗日》，ARPG《赤痕:夜之仪式》国际版）按时高质量交付。</li>
+                            <li>深度介入研发流程，紧密协同策划、美术、程序、UX、运营等团队，熟悉大型游戏开发协作模式。</li>
+                            <li>通过数据分析驱动部门绩效改进与研发流程优化。</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="experience-item">
+                    <div class="item-title">产品经理 (ToB解决方案方向)</div>
+                    <div class="item-subtitle">网博实景 (北京) 网络科技有限公司</div>
+                    <div class="item-date">2014.05 - 2017.10</div>
+                     <div class="item-description">
+                        <ul>
+                            <li><strong>作为核心负责人，端到端主导多个大型VR/AR/互动科技项目</strong>，从早期客户接洽、需求分析、<strong>基于前沿技术(AR/VR/体感等)的创新解决方案设计</strong>、技术可行性论证、项目投标，到研发监管、最终交付与部署。</li>
+                            <li><strong>成功主导并交付千万级</strong>（中国中铁马来西亚科技展厅）、<strong>百万级</strong>（贵州从江旅游局科技馆）等标杆项目，方案与执行能力获得客户高度认可。</li>
+                            <li><strong>将新兴互动技术有效融入解决方案</strong>，显著提升用户体验与项目影响力，助力公司获得超千万合同额。</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="experience-item">
+                    <div class="item-title">3D设计师 / 设计主管</div>
+                    <div class="item-subtitle">北京辉煌动画 / 金兄弟科技</div>
+                    <div class="item-date">2010.07 - 2014.03</div>
+                     <div class="item-description">
+                        <ul>
+                            <li>奠定专业级3D美术功底，精通建模、动画、特效、渲染及游戏引擎(U3D/UE)工作流。</li>
+                            <li>深入参与多款游戏的美术全流程制作，产出高质量3D资源。</li>
+                         </ul>
+                    </div>
+                </div>
+            </section>
+
+             <!-- 创业经历 -->
+            <section id="entrepreneurship">
+                <h2>创业经历</h2>
+                 <div class="experience-item">
+                    <div class="item-title">合伙人</div>
+                    <div class="item-subtitle">广州甄侯鲐贸易有限公司</div>
+                    <div class="item-date">2022.07 - 2024.12</div>
+                     <div class="item-description">
+                        <ul>
+                            <li>探索"实体+新零售"模式，研究AI/VR技术在提升用户体验和运营效率方面的应用。</li>
+                         </ul>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="item-title">合伙人 / 产品负责人</div>
+                    <div class="item-subtitle">北京极娱科技有限公司</div>
+                    <div class="item-date">2017.10 - 2019.12</div>
+                     <div class="item-description">
+                        <ul>
+                             <li>负责ToB/ToG业务的产品解决方案设计、项目获取与交付管理。</li>
+                         </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 教育背景 -->
+            <section id="education">
+                <h2>教育背景</h2>
+                 <div class="experience-item">
+                    <div class="item-title">美术学 (绘画方向) | 本科</div>
+                    <div class="item-subtitle">新疆艺术学院</div>
+                    <div class="item-date">2007.09 - 2011.07</div>
+                </div>
+                 <div class="experience-item">
+                    <div class="item-title">AI产品经理专业课程研修</div>
+                    <div class="item-subtitle">在线/自学</div>
+                    <div class="item-date">2023.08 - 至今</div>
+                </div>
+            </section>
+
+            <!-- 荣誉与专利 -->
+            <section id="honors">
+                 <h2>荣誉与专利</h2>
+                 <div class="item-description">
+                    <ul>
+                         <li>发明专利："一种婴幼儿智能看护方法和系统"（专利号：ZL201810582192.X, 状态: 已授权，曾持有）</li>
+                        <li>实用新型专利："一种引导婴幼儿刷牙的系统"（专利号：ZL201820877461.0, 状态: 已授权，曾持有）</li>
+                     </ul>
+                 </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ==== 底部作品展示区 ==== -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="portfolio-title-bar">
+            <h2>作品案例</h2>
+        </div>
+        <div class="portfolio-grid">
+            <!-- 作品内容将由JavaScript动态生成 -->
+        </div>
+        <!-- 将版权信息整合到portfolio-section中 -->
+        <div class="copyright-info" style="padding: 15px 0; color: #888; text-align: center; font-size: 0.9em; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            &copy; 2025 哈木. All Rights Reserved.
+        </div>
+    </section>
+
+    <!-- JavaScript代码 -->
+    <script>
+        // 作品数据配置
+        const portfolioData = {
+            'rl-demo': {
+                title: '大型ToC游戏项目管理实践 (网易)',
+                image: 'assets/images/portfolio-rl-path.jpg',
+                tags: ['项目管理', 'ToC游戏 (SLG/ARPG)', '跨部门协作', '流程优化', '数据驱动', '《率土之滨》'],
+                brief: '负责保障网易S级游戏《率土之滨》、《无尽的拉格朗日》及《赤痕:夜之仪式》国际版高质量交付。深度参与研发全流程，高效协同策划、美术、程序、UX及运营等多元团队，深刻理解大型游戏开发管线与协作模式。通过数据分析驱动流程优化与绩效改进。',
+                expandImages: [
+                    'assets/images/rl-demo-1.jpg',
+                    'assets/images/rl-demo-2.jpg',
+                    'assets/images/rl-demo-3.jpg'
+                ]
+            },
+            'ai-app': {
+                title: 'ToC自由视角APP：云海糖 (POC阶段)',
+                image: 'assets/images/portfolio-ai-app.jpg',
+                tags: ['ToC产品设计', '产品孵化 (0-1)', '原型设计 (APP+后台)', '视觉风格定义', '用户研究', '自由视角'],
+                brief: '开发一个简单的Web端AI对话应用，前端使用JS与后端交互，后端Python调用大模型API，实现基础的问答功能...',
+                expandImages: [
+                    'assets/images/ai-app-1.jpg',
+                    'assets/images/ai-app-2.jpg',
+                    'assets/images/ai-app-3.jpg'
+                ]
+            },
+            'vr-project': {
+                title: '千万级出海项目：中铁马来西亚VR/AR科技馆',
+                image: 'assets/images/portfolio-vr-ar.jpg',
+                tags: ['VR/AR', '解决方案设计', '项目主导', '体感交互', '大型项目 (千万级)', '技术整合'],
+                brief: '作为核心负责人，端到端主导中国中铁首个出海大型科技展馆项目。基于对VR/AR/体感等前沿技术的深刻理解，设计并整合多元化创新互动体验方案。克服跨国协作、技术集成等多重挑战，成功在马来西亚落地交付，获得客户高度认可。',
+                expandImages: [
+                    'assets/images/vr-project-1.jpg',
+                    'assets/images/vr-project-2.jpg',
+                    'assets/images/vr-project-3.jpg'
+                ]
+            },
+            'cong-jiang': {
+                title: '独立主导百万级项目：从江VR旅游体验馆',
+                image: 'assets/images/cong-jiang.jpg',
+                tags: ['VR/AR', '解决方案设计', '独立负责', '需求分析', '项目全流程', '百万级项目'],
+                brief: '独立完成从前期客户接洽、深度需求沟通、创新方案设计与讲解、商务谈判至合同签署的全过程。后续主导项目实施与交付，成功落地百万级VR旅游体验馆。充分验证了在复杂项目中独立获取需求、设计方案并推动落地的综合能力。',
+                expandImages: [
+                    'assets/images/cong-jiang-1.jpg',
+                    'assets/images/cong-jiang-2.jpg'
+                ]
+            },
+            'geren-jiangli': {
+                title: '小小成绩:行业认可与创新实践 ',
+                image: 'assets/images/geren-jiangli.jpg',
+                tags: ['行业奖项', '媒体报道', '路演经验', '创新思维', '发明专利', '解决问题'],
+                brief: '曾获亚洲VR&AR博览会“亚洲十大品牌人物”奖项荣誉。个人曾获ARinChina等行业媒体采访报道。参与大型创投路演比赛，从数千项目中脱颖而出（Top 32）。持有发明及实用新型专利两项等。',
+                expandImages: [
+                    'assets/images/geren-jiangli-1.jpg',
+                    'assets/images/geren-jiangli-2.jpg'
+                ]
+            }
+        };
+
+        // 修改展开/收起功能
+        function toggleExpand(button, key) {
+            const portfolioItem = button.closest('.portfolio-item');
+            const expandSection = portfolioItem.querySelector('.portfolio-expand-section');
+            const expandGrid = expandSection.querySelector('.expand-grid');
+            const bottomCollapseBtn = expandSection.querySelector('.bottom-collapse-btn');
+            
+            if (expandSection.classList.contains('active')) {
+                // 收起时，先记住当前展开项的顶部位置
+                const itemTop = portfolioItem.offsetTop;
+                
+                // 收起内容
+                expandSection.classList.remove('active');
+                button.textContent = '▼ 展开';
+                expandSection.style.maxHeight = '0';
+                if (bottomCollapseBtn) {
+                    bottomCollapseBtn.classList.remove('active');
+                }
+                
+                // 平滑滚动回原位置
+                window.scrollTo({
+                    top: itemTop - 20, // 减去一点偏移量，让视觉效果更好
+                    behavior: 'smooth'
+                });
+            } else {
+                // 展开前记住当前位置
+                portfolioItem.dataset.scrollPosition = window.scrollY;
+                
+                // 展开内容
+                expandSection.classList.add('active');
+                button.textContent = '▲ 收起';
+                expandSection.style.maxHeight = (expandGrid.scrollHeight + 60) + 'px';
+                if (bottomCollapseBtn) {
+                    bottomCollapseBtn.classList.add('active');
+                }
+            }
+        }
+
+        // 生成作品HTML时修改底部收起按钮的点击事件
+        function generatePortfolioHTML() {
+            const container = document.querySelector('.portfolio-grid');
+            container.innerHTML = '';
+            
+            Object.entries(portfolioData).forEach(([key, data]) => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                
+                // 只在有展开图片时添加展开按钮和展开区域
+                const expandSection = data.expandImages && data.expandImages.length > 0 ? `
+                    <div class="portfolio-thumbnail">
+                        <img src="${data.image}" alt="${data.title}">
+                        <button class="details-toggle-btn" onclick="toggleDetails(this)">▼ 查看详情</button>
+                        <div class="portfolio-overlay">
+                            <h4>${data.title}</h4>
+                            <div class="portfolio-tags">
+                                ${data.tags.map(tag => `<span class="portfolio-tag">${tag.trim()}</span>`).join('')}
+                            </div>
+                            <p class="portfolio-brief">${data.brief}</p>
+                        </div>
+                        <button class="expand-toggle-btn" onclick="toggleExpand(this, '${key}')">▼ 展开</button>
+                    </div>
+                    <div class="portfolio-expand-section">
+                        <div class="expand-grid">
+                            ${data.expandImages.map(img => `
+                                <div class="expand-item">
+                                    <img src="${img}" alt="展开图片">
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="bottom-collapse-btn" onclick="toggleExpand(this.closest('.portfolio-item').querySelector('.expand-toggle-btn'), '${key}')">▲ 收起</button>
+                    </div>
+                ` : `
+                    <div class="portfolio-thumbnail">
+                        <img src="${data.image}" alt="${data.title}">
+                        <button class="details-toggle-btn" onclick="toggleDetails(this)">▼ 查看详情</button>
+                        <div class="portfolio-overlay">
+                            <h4>${data.title}</h4>
+                            <div class="portfolio-tags">
+                                ${data.tags.map(tag => `<span class="portfolio-tag">${tag.trim()}</span>`).join('')}
+                            </div>
+                            <p class="portfolio-brief">${data.brief}</p>
+                        </div>
+                    </div>
+                `;
+                
+                portfolioItem.innerHTML = expandSection;
+                container.appendChild(portfolioItem);
+            });
+        }
+
+        // 查看详情功能
+        function toggleDetails(button) {
+            const portfolioItem = button.closest('.portfolio-item');
+            const overlay = portfolioItem.querySelector('.portfolio-overlay');
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                button.textContent = '▼ 查看详情';
+            } else {
+                overlay.classList.add('active');
+                button.textContent = '▲ 收起';
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            generatePortfolioHTML();
+        });
+
+        // 添加JavaScript来处理滚动位置检测
+        document.addEventListener('DOMContentLoaded', function() {
+            const navScroll = document.querySelector('.page-nav-scroll');
+            
+            function checkScroll() {
+                if (navScroll.scrollLeft <= 0) {
+                    navScroll.classList.add('at-start');
+                } else {
+                    navScroll.classList.remove('at-start');
+                }
+                
+                if (navScroll.scrollLeft + navScroll.clientWidth >= navScroll.scrollWidth) {
+                    navScroll.classList.add('at-end');
+                } else {
+                    navScroll.classList.remove('at-end');
+                }
+            }
+            
+            // 监听滚动事件
+            navScroll.addEventListener('scroll', checkScroll);
+            // 初始检查
+            checkScroll();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', checkScroll);
+        });
+    </script>
+
+</body>
+</html>
