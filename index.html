@@ -354,7 +354,13 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            background-color: #10182b;
+            background-color: #292929; /* 控制整个作品区域的背景色，包括作品项之间的间隙 */
+            /* 
+            ===== 背景色微调指南 =====
+            1. 这个颜色会显示在作品项之间的间隙中
+            2. 可以修改为更深或更浅的颜色以配合整体设计
+            3. 建议使用与主题协调的深色调，如#10182b(深蓝)、#2c3e50(深青)、#333(深灰)等
+            */
             display: flex;
             flex-direction: column;
         }
@@ -394,6 +400,19 @@
             position: relative;
             background-color: #10182b;
             border: none; /* 移除边框 */
+            margin-bottom: 40px; /* 控制作品项之间的间隙高度 - 可以调整这个值来增加或减少间隙 */
+            /* 
+            ===== 作品间隙微调指南 =====
+            1. 增加间隙: 将margin-bottom增加到更大的值，如70px、80px等
+            2. 减少间隙: 将margin-bottom减少到更小的值，如50px、40px等
+            3. 注意: 修改此值会直接影响按钮所在间隙的高度
+            4. 修改后，可能需要同时调整下方按钮的位置，查看.expand-toggle-btn和.details-toggle-btn的bottom值
+            */
+        }
+
+        /* 作品项样式 - 最后一个没有底部间距 */
+        .portfolio-item:last-child {
+            margin-bottom: 0;
         }
 
         /* 缩略图容器 */
@@ -417,10 +436,17 @@
         /* 展开区域样式 */
         .portfolio-expand-section {
             width: 100%;
-            max-height: 0;
+            max-height: 0px;
             overflow: hidden;
             transition: max-height 0.5s ease-out;
-            background: #10182b;
+            background: #c5c5c5; /* 控制展开区域背景色，包括底部间隙 */
+            /* 
+            ===== 展开区域与下一个作品区间隙说明 =====
+            1. 展开区域底部与下一个作品项之间的间隙由多个因素共同控制:
+               a. 此处的background值(#c5c5c5)控制间隙的背景色
+               b. 下方.bottom-collapse-btn的margin值控制间隙的实际高度
+               c. 对整体间隙进行调整需要综合考虑这两个元素的设置
+            */
             margin: 0;
             padding: 0;
             border: none;
@@ -462,7 +488,15 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: 20px;
+            bottom: -38px; /* 按钮在间隙中的垂直位置 - 配合作品项的margin-bottom使用 */
+            /* 
+            ===== 展开按钮位置微调指南 =====
+            1. 当增加作品间隙(增大portfolio-item的margin-bottom)时:
+               - 可以将bottom值改为更小的负值，如-35px、-40px，使按钮在间隙中更靠下
+            2. 当减少作品间隙(减小portfolio-item的margin-bottom)时:
+               - 可以将bottom值改为更大的负值，如-25px、-20px，使按钮在间隙中更靠上
+            3. 以上调整确保按钮始终在两个作品项之间的间隙内保持美观位置
+            */
             background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: none;
@@ -479,7 +513,14 @@
             position: relative;
             left: 50%;
             transform: translateX(-50%);
-            margin: 15px 0;
+            margin: 15px 0; /* 控制展开内容底部到下一个作品展示区的间隙高度 */
+            /* 
+            ===== 展开内容底部间隙微调指南 =====
+            1. 上方的margin值(15px)控制按钮与展开内容最后一张图片的距离
+            2. 下方的margin值(0)控制按钮与下一个作品展示区的距离
+            3. 增加下方值(如15px 15px)可以增加展开内容底部与下一个作品区的间隙
+            4. 这个间隙的背景色与.portfolio-expand-section的background相同(#c5c5c5)
+            */
             background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: none;
@@ -514,6 +555,45 @@
             visibility: hidden;
         }
 
+        /* 右上角收起按钮 - 当详情显示时在右上角显示 */
+        .overlay-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            border-radius: 4px; /* 改为矩形按钮，与其他按钮样式一致 */
+            padding: 4px 12px; /* 调整内边距 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            z-index: 1001; /* 确保它位于最上层 */
+            transition: all 0.3s ease;
+            /* 
+            ===== 右上角收起按钮说明 =====
+            1. 此按钮是为了解决原始收起按钮可能被底部导航栏遮挡的问题
+            2. 当点击"查看详情"后，此按钮会显示在详情内容的右上角
+            3. 点击此按钮的功能与点击原始"收起"按钮完全相同
+            4. 可以调整top和right值来改变按钮的位置
+            */
+        }
+
+        .overlay-close-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .overlay-close-btn {
+                top: 8px;
+                right: 8px;
+                padding: 3px 10px;
+                font-size: 0.8rem;
+            }
+        }
+
         .portfolio-overlay.active {
             transform: translateY(0);
             opacity: 1;
@@ -523,7 +603,12 @@
         /* 调整详情按钮位置，避免重叠 */
         .details-toggle-btn {
             position: absolute;
-            bottom: 20px;
+            bottom: -38px; /* 按钮在间隙中的垂直位置 - 与expand-toggle-btn保持一致 */
+            /* 
+            ===== 详情按钮位置微调指南 =====
+            1. 通常保持与展开按钮相同的bottom值，确保两个按钮水平对齐
+            2. 调整后请确认按钮在各种屏幕尺寸下不会重叠或超出间隙范围
+            */
             right: 20px;
             transform: none;
             background-color: rgba(0, 0, 0, 0.7);
@@ -551,10 +636,17 @@
                 margin: 0;
             }
             .details-toggle-btn {
-                bottom: 15px;
-                right: 15px;
-                padding: 6px 16px;
-                font-size: 0.85rem;
+                bottom: -35px; /* "查看详情"按钮 移动端时的底部距离 - 这里控制按钮在小屏幕下的垂直位置 */
+                right: 15px; /* "查看详情"按钮 移动端时的右侧距离 - 控制在水平位置上的偏移 */
+                padding: 6px 16px; /* "查看详情"按钮 移动端时按钮内边距变小，按钮整体变小 */
+                font-size: 0.85rem; /* "查看详情"按钮 移动端时字体变小 */
+                /* 
+                ===== 移动端按钮位置调整说明 =====
+                1. 当页面宽度小于768px时，这些样式将覆盖默认样式
+                2. bottom: 15px 使按钮在小屏幕上移至更高位置(原值为-30px)
+                3. 如需调整移动端下按钮位置，可修改此处的bottom和right值
+                4. 增大bottom值会使按钮更靠上，减小则会使按钮更靠下
+                */
             }
         }
 
@@ -702,6 +794,13 @@
             font-size: 0.9em;
             width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.1); /* 添加一个微妙的分隔线 */
+            /* 
+            ===== footer样式说明 =====
+            1. 这是标准footer元素的样式定义，但在当前页面中未使用footer标签
+            2. 实际使用的是上方.copyright-info样式，位于portfolio-section底部
+            3. 两者样式相似但应用在不同元素上
+            4. 如要修改底部版权区域，请参考.copyright-info的内联样式
+            */
         }
 
     </style>
@@ -711,7 +810,7 @@
     <!-- ==== 顶部头图 ==== -->
     <header class="header-banner">
         <!-- !!! 请将这里的 src 替换为你的头图图片路径 !!! -->
-        <img src="assets/images/header-banner.jpg" alt="头图背景" class="header-banner-img">
+        <img src="assets/images/header-banner.webp" alt="头图背景" class="header-banner-img">
         <div class="header-overlay">
             <div class="header-content">
                 <h1>哈木</h1>
@@ -729,7 +828,7 @@
             <div class="profile-block">
                 <div class="avatar">
                     <!-- !!! 请将这里的 src 替换为你的头像图片路径 !!! -->
-                    <img src="assets/images/avatar.jpg" alt="哈木头像">
+                    <img src="assets/images/avatar.webp" alt="哈木头像">
                 </div>
                 <h1>哈木</h1>
                 <p class="job-title">AI 产品经理<br>聚焦游戏/XR/元宇宙/AI智能NPC</p>
@@ -993,8 +1092,19 @@
             <!-- 作品内容将由JavaScript动态生成 -->
         </div>
         <!-- 将版权信息整合到portfolio-section中 -->
-        <div class="copyright-info" style="padding: 15px 0; color: #888; text-align: center; font-size: 0.9em; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="copyright-info" style="padding: 25px 0; color: #a0a0a0; text-align: center; font-size: 0.9em; border-top: 40px solid rgb(49, 49, 49);">
             &copy; 2025 哈木. All Rights Reserved.
+            <!-- 
+            ===== 版权信息区域说明 =====
+            1. 该版权信息位于portfolio-section(作品展示区)的底部
+            2. 样式通过内联CSS控制(style属性)，包括:
+               - padding: 15px 0 控制上下内边距，决定信息区域的高度
+               - color: #888 控制文字颜色(灰色)
+               - border-top 添加顶部分隔线，颜色为rgba(255, 255, 255, 0.1)半透明白色
+            3. 背景色继承自portfolio-section的background-color
+            4. 修改版权信息区域高度需调整padding值
+            5. 修改版权信息文字只需更改此处文本内容
+            -->
         </div>
     </section>
 
@@ -1002,57 +1112,57 @@
     <script>
         // 作品数据配置
         const portfolioData = {
-            'rl-demo': {
+            'pic-1-0': {
                 title: '大型ToC游戏项目管理实践 (网易)',
-                image: 'assets/images/portfolio-rl-path.jpg',
+                image: 'assets/images/pic-1-0.webp',
                 tags: ['项目管理', 'ToC游戏 (SLG/ARPG)', '跨部门协作', '流程优化', '数据驱动', '《率土之滨》'],
                 brief: '负责保障网易S级游戏《率土之滨》、《无尽的拉格朗日》及《赤痕:夜之仪式》国际版高质量交付。深度参与研发全流程，高效协同策划、美术、程序、UX及运营等多元团队，深刻理解大型游戏开发管线与协作模式。通过数据分析驱动流程优化与绩效改进。',
                 expandImages: [
-                    'assets/images/rl-demo-1.jpg',
-                    'assets/images/rl-demo-2.jpg',
-                    'assets/images/rl-demo-3.jpg'
+                    'assets/images/pic-1-1.webp',
+                    'assets/images/pic-1-2.webp',
+                    'assets/images/pic-1-3.webp'
                 ]
             },
-            'ai-app': {
+            'pic-2-0': {
                 title: 'ToC自由视角APP：云海糖 (POC阶段)',
-                image: 'assets/images/portfolio-ai-app.jpg',
+                image: 'assets/images/pic-2-0.webp',
                 tags: ['ToC产品设计', '产品孵化 (0-1)', '原型设计 (APP+后台)', '视觉风格定义', '用户研究', '自由视角'],
                 brief: '开发一个简单的Web端AI对话应用，前端使用JS与后端交互，后端Python调用大模型API，实现基础的问答功能...',
                 expandImages: [
-                    'assets/images/ai-app-1.jpg',
-                    'assets/images/ai-app-2.jpg',
-                    'assets/images/ai-app-3.jpg'
+                    'assets/images/pic-2-1.webp',
+                    'assets/images/pic-2-2.webp',
+                    'assets/images/pic-2-3.webp'
                 ]
             },
-            'vr-project': {
+            'pic-3-0': {
                 title: '千万级出海项目：中铁马来西亚VR/AR科技馆',
-                image: 'assets/images/portfolio-vr-ar.jpg',
+                image: 'assets/images/pic-3-0.webp',
                 tags: ['VR/AR', '解决方案设计', '项目主导', '体感交互', '大型项目 (千万级)', '技术整合'],
                 brief: '作为核心负责人，端到端主导中国中铁首个出海大型科技展馆项目。基于对VR/AR/体感等前沿技术的深刻理解，设计并整合多元化创新互动体验方案。克服跨国协作、技术集成等多重挑战，成功在马来西亚落地交付，获得客户高度认可。',
                 expandImages: [
-                    'assets/images/vr-project-1.jpg',
-                    'assets/images/vr-project-2.jpg',
-                    'assets/images/vr-project-3.jpg'
+                    'assets/images/pic-3-1.webp',
+                    'assets/images/pic-3-2.webp',
+                    'assets/images/pic-3-3.webp'
                 ]
             },
-            'cong-jiang': {
+            'pic-4-0': {
                 title: '独立主导百万级项目：从江VR旅游体验馆',
-                image: 'assets/images/cong-jiang.jpg',
+                image: 'assets/images/pic-4-0.webp',
                 tags: ['VR/AR', '解决方案设计', '独立负责', '需求分析', '项目全流程', '百万级项目'],
                 brief: '独立完成从前期客户接洽、深度需求沟通、创新方案设计与讲解、商务谈判至合同签署的全过程。后续主导项目实施与交付，成功落地百万级VR旅游体验馆。充分验证了在复杂项目中独立获取需求、设计方案并推动落地的综合能力。',
                 expandImages: [
-                    'assets/images/cong-jiang-1.jpg',
-                    'assets/images/cong-jiang-2.jpg'
+                    'assets/images/pic-4-1.webp',
+                    'assets/images/pic-4-2.webp'
                 ]
             },
-            'geren-jiangli': {
+            'pic-5-0': {
                 title: '小小成绩:行业认可与创新实践 ',
-                image: 'assets/images/geren-jiangli.jpg',
+                image: 'assets/images/pic-5-0.webp',
                 tags: ['行业奖项', '媒体报道', '路演经验', '创新思维', '发明专利', '解决问题'],
-                brief: '曾获亚洲VR&AR博览会“亚洲十大品牌人物”奖项荣誉。个人曾获ARinChina等行业媒体采访报道。参与大型创投路演比赛，从数千项目中脱颖而出（Top 32）。持有发明及实用新型专利两项等。',
+                brief: '曾获亚洲VR&AR博览会"亚洲十大品牌人物"奖项荣誉。个人曾获ARinChina等行业媒体采访报道。参与大型创投路演比赛，从数千项目中脱颖而出（Top 32）。持有发明及实用新型专利两项等。',
                 expandImages: [
-                    'assets/images/geren-jiangli-1.jpg',
-                    'assets/images/geren-jiangli-2.jpg'
+                    'assets/images/pic-5-1.webp',
+                    'assets/images/pic-5-2.webp'
                 ]
             }
         };
@@ -1110,6 +1220,7 @@
                         <img src="${data.image}" alt="${data.title}">
                         <button class="details-toggle-btn" onclick="toggleDetails(this)">▼ 查看详情</button>
                         <div class="portfolio-overlay">
+                            <button class="overlay-close-btn" onclick="toggleDetails(this.closest('.portfolio-item').querySelector('.details-toggle-btn'))">▼ 收起</button>
                             <h4>${data.title}</h4>
                             <div class="portfolio-tags">
                                 ${data.tags.map(tag => `<span class="portfolio-tag">${tag.trim()}</span>`).join('')}
@@ -1133,6 +1244,7 @@
                         <img src="${data.image}" alt="${data.title}">
                         <button class="details-toggle-btn" onclick="toggleDetails(this)">▼ 查看详情</button>
                         <div class="portfolio-overlay">
+                            <button class="overlay-close-btn" onclick="toggleDetails(this.closest('.portfolio-item').querySelector('.details-toggle-btn'))">▼ 收起</button>
                             <h4>${data.title}</h4>
                             <div class="portfolio-tags">
                                 ${data.tags.map(tag => `<span class="portfolio-tag">${tag.trim()}</span>`).join('')}
